@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-tac-toe</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+</head>
+<body onload="initialize()">
+    <h1>Tic-tac-toe</h1>
+    <table id="table_game">
+        <tr><td class="td_game"><div id="cell0" onclick="cellClicked(this.id)"class="fixed"></div></td><td class="td_game"><div id="cell1"onclick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell2"onclick="cellClicked(this.id)"class="fixed"></div></td></tr>
+         <tr><td class="td_game"><div id="cell3" onclick="cellClicked(this.id)"class="fixed"></div></td><td class="td_game"><div id="cell4"onclick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell5"onclick="cellClicked(this.id)"class="fixed"></div></td></tr>
+        <tr><td class="td_game"><div id="cell6" onclick="cellClicked(this.id)"class="fixed"></div></td><td class="td_game"><div id="cell7"onclick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell8"onclick="cellClicked(this.id)"class="fixed"></div></td></tr>
+    </table>
+    <div id="restart" title="Start new game" onclick="restartGame(true)"><span style="vertical-align: top;position: relative;top: -10px;"></span></div>
+    <table>
+        <tr><th class="th_list">Computer</th><th class="th_list" style="padding: 10px;padding-left: 10px;">Draws</th><th class="th_list">player</th></tr>
+        <tr><td class="td_list"id="computer-score">0</td><td class="td_list"id=</tr>
+    </table>
+</body>
+</html>
