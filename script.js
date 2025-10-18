@@ -183,7 +183,90 @@ return cells;
             for(j = 0; j < 2; j++) {
                 var diagV = this.getDiagValues(j);
                 var diagI = this.getDiagIndices(j) ;
-                if (sumArray(diagV))
+                if (sumArray(diagV) == sum && isInArray(freeCells[i], diagI)) {
+                    return freeCells[i];
+                }
             }
         }
+        return false;
+    };
+    Grid.prototype.reset = function(){
+        for (var i = 0; i < this.cells.legth;i++){
+            this.cells[i] = 0;
+        }
+        return true;
+    };
+    //===================================================
+    //MAIN FUNCTIONS 
+//===================================================
+//executed when the page loads
+function initialize() {
+    myGrid = new Grid();
+    moves = 0;
+    winner = 0;
+    gameOver = false;
+    whoseTurn = player; //default,this may change
+    for(var i = 0; i <= myGrid.cells.legth - 1;i++){
+        myGrid.cells[i] = 0;
     }
+    //setTmeout(assignRoles,500);
+    setTimeout(showOptions,500);
+    //debugger;
+}
+//Ask  player if they want to play as X or O.X goes first.
+function assignRoles(){
+    askUser("Do you want to go first?");
+
+    document.getElementById("yesBtn").addEventListener("click", makePlayerO);
+}
+function makePlayerX() {
+    player = x;
+    computer = o;
+    whoseTurn = player;
+    playerText = xText;
+    computerText = oText;
+
+    document.getElementById("userFeedback").style.display = "none";
+    document.getElementById("yesBtn").removeEventListener("click", makePlayerX);
+    document.getElementById("noBtn").removeEventListener("click",makePlayerO);
+}
+function makePlayerO() {
+    player= o;
+    computer = x;
+    whoseTurn = computer;
+    playerText = oText;
+    computerText = xText;
+    setTimeout(makeComputerMove,400);
+
+    document.getElementById("userFeeddback").style.display = "none";
+    document.getElementById("noBtn").removeEventListener("click",makePlayerO);
+}
+function makePlayeO(){
+   player = o;
+   computer = x;
+   whoseTurn = computer;
+   playerText = oText;
+
+   setTimeout(makeComputerMove,400);
+
+   document.getElementById("userFeedBack").style.display = "none";
+   document.getElementById("yesBtn").removeEventListener("click",makePlayeO);
+   document.getElementById("noBtn").removeEventListener("click",makePlayeO);
+}
+// executed when player clicks one of the table cells
+function cellClicked(id){
+    //The last character of the the id correxponds ot he numeric index in Grid.cells:
+    var idName = id.toString();
+    var cell = parrselnt(idName[idName.legth - 1]);
+    if (myGrid.cells[cell] > 0 || whoTurn !== player || gameOver) {
+        //cell is already occupied or something else is wrong
+        return false;
+    }
+    move += 1;
+    document.getElementById(id).innerHTML = playerText;
+    //randomize orientation(for looks only)
+    var rand = Math.random();
+    if(rand <0.3){
+    document.getElementById(id).style.transform = "rotate(180deg)"
+    }
+}
