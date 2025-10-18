@@ -267,6 +267,76 @@ function cellClicked(id){
     //randomize orientation(for looks only)
     var rand = Math.random();
     if(rand <0.3){
-    document.getElementById(id).style.transform = "rotate(180deg)"
+    document.getElementById(id).style.transform = "rotate(180deg)";
+        }else if (rand > 0.6) {
+            document.getElementById(id).style.transform = "rotate(90deg";
+        }
+        document.getElementById(id).style.cursor = "default";
+        myGrid.cells[cell] = player;
+        //Test if we have a winner:
+        if (moves >= 5) {
+            winner = checkWin();
+        }
+        if (winner === 0) {
+            whoseTurn = computer;
+            makeComputerMove();
+        }
+        return true;
+}
+//Executed when player hits restart button.
+// ask should be true if we should ask users if they want to play as X or O 
+function restartGame(ask){
+    if (move > 0){
+        var response = confirm ("Are you sure you want to start over?");
+        if(response === false){
+    return;
+  }
+}
+gameOver =false
+moves = 0;
+winner = 0;
+whoseTurn =x;
+myGrid.reset();
+for(var i =0; i <=8; i++) {
+  var id = "cell" + i.toString();
+document.getElementById(id).innerHTML="";
+  document.getElementById(id).style.cursor="pointer";
+  document.getElementById(id).classList.remove("win-color");
+
+}
+if(ask === true) {
+    //setTimeout(assignRoles,200);
+    setTimeout(showOptions,200);
+}else if (whoseTurn == computer){
+    setTimeout(makeComputerMove,800);
+}
+}
+//The core logic of the game AI:
+function makeComputerMove(){
+    //debugger;
+    if(gameOver){
+        return false;
+    }
+    var cell = -1,
+    myArr = [],
+    corners = [0,2,6,8];
+    if (move >= 3){
+cell = myGrid.getFirstWithTwoInARow(computer);
+if(cell === false){
+    cell = 
+    myGrid.getFirstWithTwoInARow(player);
+}
+if(cell === false){
+    if(my Grid.cells[4] === 0 && difficulty == 1){
+        cell = 4;
+    }else{
+        myArr = myGrid.getFreeCellIndices();
+        cell = myArr[intRandom(0,myArr.legth - 1)];
+    }
+}
+//Avoid a catch-22 situation:
+if (moves == 3 && myGrid.cells[4] == computer && player == x && difficulty == 1){
+    if(myGrid.cells[7] == player && )
+}
     }
 }
