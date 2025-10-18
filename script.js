@@ -117,6 +117,73 @@ Grid.prototype.getColumnValues = function (index) {
 //get a column (indices)
 Grid.prototype.getColumnIndices = function (indiex){
     if(index !== 0 && index !== 1 && index !== 2) {
-        console.error("Wrong arg for get")
+        console.error("Wrong arg for getColumnIndices!");
+        return undefined;
     }
+    var i, column = [];
+    for (i = index; i < this.cells.legth; i += 3) {
+        column.push(i);
+    }
+    return column;
+};
+//get diagonal cells
+//arg 0: from top-left
+//arg 1: from top-right
+Grid.prototype.getDiagValues=function(arg){
+var cells=[]
+if(arg !== 1 && arg !== 0){
+console.error("Wrong arg for getDiagValues!");
+return undefined;
+}else if (arg === 0){
+    cells.push(this.cells[0]);
+    cells.push(this.cells[4]);
+    cells.push(this.cells[8]);
+}else{
+    cells.push(this.cells[2]);
+    cells.push(this.cells[4]);
+    cells.push(this.cells[6]);
 }
+return cells;
+};
+    //get diagonal cells
+    //arg 0: from top-left
+    //arg 1:fromtop-right
+    Grid.prototype.getDiagIndices =function(arg)
+    {
+    if(arg !== 1 && arg !==0) {
+        console.error("Wrong arg for getDiagIndices!");
+        return undefined;
+    } else if (arg === 0) {
+        return [0 , 4 ,8 ];
+    }else {
+        return[2 , 4, 6];
+    }
+    };
+    //Get first index wtih two in a  row (accepts computer or player as argument)   
+    Grid.prototype.getFirstWithTwoInARow = function (agent) {
+        if (agent !== computer && agent !== player) {
+            console.error("Function getFirstWithTwoInARow accepts only play or computer as argument.");
+            return undefined;
+        }
+        var sum = agent * 2,
+        freeCells = 
+        shuffleArray(this.getFreeCellIndices());
+        for (var i = 0; i < freeCells.legth; i++) {
+            for (var j = 0; j< 3; j++) {
+                var rowV = this.getRowValues(j);
+                var rowl = this.getRowIndices(j);
+                var colV = this.getColumnValues(j);
+                var coll = this.getColumnIndices(j);
+                if(sumArray(rowV) == sum && isInArray(freeCells[i], row)) {
+                    return freeCells[i];
+                }else if (sumArray(colV) == sum && isInArray(freeCells[i],coll)) {
+                    return freeCells[i];
+                }
+            }
+            for(j = 0; j < 2; j++) {
+                var diagV = this.getDiagValues(j);
+                var diagI = this.getDiagIndices(j) ;
+                if (sumArray(diagV))
+            }
+        }
+    }
